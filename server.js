@@ -1,5 +1,6 @@
 let express = require('express'),
-    session = require('express-session'),
+    cookieParser = require('cookie-parser');
+session = require('express-session'),
     path = require('path'),
     bodyParser = require('body-parser'),
     userModel = require('./db').userModel,
@@ -12,6 +13,12 @@ let app = express(),
 app.use(express.static(path.resolve('public')));
 app.use(express.static(path.resolve('app')));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({
+    secret: 'yyh',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.get('/', function (req, res) {
     res.sendFile(path.resolve('app/index.html'));
@@ -21,10 +28,12 @@ app.post('/user/login', function (req, res) {
     let user = {email: req.body.email};
     userModel.findOne(user).then(function (data) {
         if (data) {
+            req.session.user = data;
             res.send({code: 0, msg: 'success', data});
         } else {
             user.avatar = 'https://secure.gravatar.com/avatar/email?s=32';
             userModel.create(user).then(function (data) {
+                req.session.user = data;
                 res.send({code: 0, msg: 'success', data});
             }, function (error) {
                 res.send({code: 1, msg: 'error', error});
@@ -33,6 +42,15 @@ app.post('/user/login', function (req, res) {
     }, function (error) {
         res.send({code: 1, msg: 'error', error});
     })
+});
+
+app.get('/session', function (req, res) {
+    res.send(req.session.user);
+});
+
+app.get('/logout', function (req, res) {
+    req.session.user = null;
+    res.redirect('/');
 });
 
 app.get('/rooms', function (req, res) {
@@ -66,7 +84,7 @@ io.on('connection', function (socket) {
         let _id = info._id;
         socket.join(_id);
         roomModel.findOne({_id, users: info.user}).then(function (data) {
-            if(!data){
+            if (!data) {
                 roomModel.update({_id}, {$push: {users: info.user}}).then();
             }
         });
@@ -90,4 +108,3 @@ io.on('connection', function (socket) {
 server.listen(80, ()=> {
     console.log('Server is listening on 80 port');
 });
-

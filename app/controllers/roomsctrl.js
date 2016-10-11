@@ -1,8 +1,8 @@
-angular.module('chatMod').controller('RoomsCtrl', function ($scope, $location, $http, $rootScope) {
-    if(!$rootScope.user){
-        $location.path('/');
-        return;
+angular.module('chatMod').controller('RoomsCtrl', function ($scope, $location, $http, $rootScope, session) {
+    if (!$rootScope.user) {
+        session.check();
     }
+
     $http({
         url: '/rooms',
         method: 'GET'

@@ -8,5 +8,8 @@ angular.module('chatMod', ['ngRoute']).config(function ($routeProvider) {
     }).when('/room/:_id', {
         templateUrl: '/pages/room.html',
         controller: 'RoomCtrl'
+    }).when('/logout', {
+        template: '',
+        controller: 'LogoutCtrl'
     }).otherwise('/');
 });

@@ -1,6 +1,6 @@
-angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams, $http, $rootScope, $location) {
+angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams, $http, $rootScope, $location, session) {
     if (!$rootScope.user) {
-        $location.path('/');
+        session.check();
         return;
     }
 
@@ -33,7 +33,6 @@ angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams,
         socket.emit('message', {user: $rootScope.user._id, content: $scope.content, createAt: new Date()});
     };
 });
-
 
 angular.module('chatMod').directive('keyDown', function () {
     return {
