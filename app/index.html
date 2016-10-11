@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cn" ng-app="chatMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/lib/angular/angular-csp.css">
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">聊天室</div>
+            </div>
+            <div>
+                <ul ng-if="user" ng-cloak class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="">
+                            <img class="img-rounded" ng-src="{{user.avatar}}" alt="">
+                            {{user.email}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div ng-view>
+
+    </div>
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular-route/angular-route.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+<script src="/controllers/loginctrl.js"></script>
+<script src="/controllers/roomsctrl.js"></script>
+<script src="/controllers/roomctrl.js"></script>
+</body>
+</html>
