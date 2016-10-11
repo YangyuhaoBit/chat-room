@@ -12,7 +12,7 @@ npm install
 bower install
 ```
 ## 运行项目
-本项目需要`MongoDB`数据库支持，`MongoDB`下载及使用请点[这里](https://www.mongodb.org/)
+本项目需要`MongoDB`数据库支持，`MongoDB`下载及使用请点击[这里](https://www.mongodb.org/)
 
 启动`MongoDB`数据库，如果数据库地址不为`localhost:27017`请进入项目目录下的`config`目录中的`index.js`
 
@@ -28,4 +28,12 @@ module.exports = {
 ```
 npm start
 ```
-如果是在PC端查看项目，则通过`http://localhost`便可访问项目
+
+如果没有`MongoDB`数据库，可以运行
+```
+npm run start-without-db
+```
+来预览项目
+
+如果是在PC端查看项目，则项目启动后便可通过`http://localhost`访问项目
+

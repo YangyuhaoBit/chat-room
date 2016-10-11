@@ -1,6 +1,6 @@
 let express = require('express'),
-    cookieParser = require('cookie-parser');
-session = require('express-session'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
     path = require('path'),
     bodyParser = require('body-parser'),
     userModel = require('./db').userModel,
@@ -44,13 +44,17 @@ app.post('/user/login', function (req, res) {
     })
 });
 
-app.get('/session', function (req, res) {
-    res.send(req.session.user);
+app.get('/user/session', function (req, res) {
+    if (!req.session.user) {
+        res.send({code: 1, msg: 'error'});
+    } else {
+        res.send({code: 0, msg: 'success', data: req.session.user});
+    }
 });
 
-app.get('/logout', function (req, res) {
+app.get('/user/logout', function (req, res) {
     req.session.user = null;
-    res.redirect('/');
+    res.send({code: 0, msg: 'success'});
 });
 
 app.get('/rooms', function (req, res) {

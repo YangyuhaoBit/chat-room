@@ -1,15 +1,15 @@
-angular.module('chatMod').factory('session', function ($http, $rootScope,$location) {
+angular.module('chatMod').factory('session', function ($http, $rootScope, $location) {
     return {
         check(){
             return $http({
-                url: '/session',
+                url: 'user/session',
                 method: 'GET'
-            }).success(function (data) {
-                if(!data){
+            }).success(function (result) {
+                if (result.code == 0) {
+                    $rootScope.user = result.data;
+                } else {
                     $location.path('/');
-                    return;
                 }
-                $rootScope.user = data;
             })
         }
     }
