@@ -17,7 +17,7 @@ let RoomSchema = new mongoose.Schema({
     messages: [{
         user: {type: ObjectId, ref: "User"},
         content: String,
-        createAt: {type: Date, default: Date.now()}
+        createAt: String
     }]
 });
 

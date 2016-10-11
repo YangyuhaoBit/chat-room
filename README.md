@@ -1,5 +1,9 @@
 # chat-room
-一个基于`Angular`、`express`、`socket.io`、`MongoDB`的在线聊天室
+基于`WebSocket`技术的在线聊天室
+
+项目中所用的主要技术有：
+- 前端：`Angular`、`bootstrap`
+- 后端：`Node`、`express`、`socket.io`
 
 ## 下载项目
 ```
@@ -16,7 +20,7 @@ bower install
 
 启动`MongoDB`数据库，如果数据库地址不为`localhost:27017`请进入项目目录下的`config`目录中的`index.js`
 
-`config/index.js`
+config/index.js
 ```
 module.exports = {
     dbUrl: 'mongodb://localhost/chat'

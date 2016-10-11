@@ -1,7 +1,6 @@
 angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams, $http, $rootScope, $location, session) {
     if (!$rootScope.user) {
         session.check();
-        return;
     }
 
     let _id = $routeParams._id;
@@ -30,7 +29,7 @@ angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams,
     };
 
     $scope.send = function () {
-        socket.emit('message', {user: $rootScope.user._id, content: $scope.content, createAt: new Date()});
+        socket.emit('message', {user: $rootScope.user._id, content: $scope.content, createAt: new Date().toLocaleString()});
     };
 });
 
