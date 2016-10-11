@@ -1,3 +1,3 @@
 module.exports = {
-    dbUrl:'mongodb://localhost/chat'
+    dbUrl: 'mongodb://localhost/chat'
 };
