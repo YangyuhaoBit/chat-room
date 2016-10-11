@@ -1,6 +1,7 @@
 angular.module('chatMod').controller('RoomsCtrl', function ($scope, $location, $http, $rootScope) {
     if(!$rootScope.user){
         $location.path('/');
+        return;
     }
     $http({
         url: '/rooms',

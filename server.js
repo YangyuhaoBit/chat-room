@@ -55,7 +55,6 @@ app.post('/rooms', function (req, res) {
 
 app.get('/room/:_id', function (req, res) {
     roomModel.findById(req.params._id).populate('users').populate('messages.user').then(function (data) {
-        console.log(data);
         res.send({code: 0, msg: 'success', data});
     }, function (error) {
         res.send({code: 1, msg: 'error', error});
@@ -64,10 +63,14 @@ app.get('/room/:_id', function (req, res) {
 
 io.on('connection', function (socket) {
     socket.on('enter room', function (info) {
-        let _id = info._id,
-            user = null;
+        let _id = info._id;
         socket.join(_id);
-        roomModel.update({_id}, {$push: {users: info.user}}).then();
+        roomModel.findOne({_id, users: info.user}).then(function (data) {
+            if(!data){
+                roomModel.update({_id}, {$push: {users: info.user}}).then();
+            }
+        });
+        let user = null;
         userModel.findById(info.user).then(function (data) {
             user = data;
         });
@@ -77,7 +80,7 @@ io.on('connection', function (socket) {
             io.in(_id).emit('message', message);
         })
     });
-    socket.on('leave room',function (info) {
+    socket.on('leave room', function (info) {
         let _id = info._id;
         roomModel.update({_id}, {$pull: {users: info.user}}).then();
         socket.leave(_id);
@@ -85,6 +88,6 @@ io.on('connection', function (socket) {
 });
 
 server.listen(80, ()=> {
-    console.log('ok');
+    console.log('Server is listening on 80 port');
 });
 

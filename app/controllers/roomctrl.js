@@ -1,6 +1,7 @@
 angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams, $http, $rootScope, $location) {
     if (!$rootScope.user) {
         $location.path('/');
+        return;
     }
 
     let _id = $routeParams._id;

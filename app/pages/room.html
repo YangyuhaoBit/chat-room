@@ -10,7 +10,7 @@
                         <img ng-src="{{message.user.avatar}}" alt="">
                         {{message.user.email}}
                         {{message.content}}
-                        <span class="pull-right">{{message.createAt}}</span>
+                        <span class="pull-right">{{message.createAt.toLocaleTimeString()}}</span>
                     </li>
                 </ul>
             </div>

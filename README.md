@@ -3,7 +3,7 @@
 
 ## 下载项目
 ```
-git clone https://github.com/YangyuhaoBit/chat-room.git
+$ git clone https://github.com/YangyuhaoBit/chat-room.git
 ```
 ## 安装依赖
 前端的依赖通过`bower`管理，后端的依赖通过`npm`管理，安装依赖前请先确认已安装`bower`和`npm`
@@ -28,3 +28,4 @@ module.exports = {
 ```
 npm start
 ```
+如果是在PC端查看项目，则通过`http://localhost`便可访问项目
