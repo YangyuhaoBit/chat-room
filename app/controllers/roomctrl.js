@@ -29,7 +29,11 @@ angular.module('chatMod').controller('RoomCtrl', function ($scope, $routeParams,
     };
 
     $scope.send = function () {
-        socket.emit('message', {user: $rootScope.user._id, content: $scope.content, createAt: new Date().toLocaleString()});
+        socket.emit('message', {
+            user: $rootScope.user._id,
+            content: $scope.content,
+            createAt: new Date().toLocaleString()
+        });
     };
 });
 

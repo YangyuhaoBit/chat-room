@@ -4,10 +4,13 @@
             <div class="form-group">
                 <label for="email" class="control-label col-xs-2">邮箱</label>
                 <div class="col-xs-4">
-                    <input ng-model="email" ng-required="true" type="email" class="form-control" id="email" name="email">
+                    <input ng-model="email" ng-required="true" type="email" class="form-control" id="email"
+                           name="email">
                 </div>
                 <div class="col-xs-2">
-                    <button type="submit" ng-disabled="userForm.$pristine || (userForm.$dirty && userForm.$invalid) || userForm.$submitted" class="btn btn-primary">
+                    <button type="submit"
+                            ng-disabled="userForm.$pristine || (userForm.$dirty && userForm.$invalid) || userForm.$submitted"
+                            class="btn btn-primary">
                         登录
                     </button>
                 </div>
